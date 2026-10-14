@@ -2,15 +2,22 @@ pipeline {
     agent any
     stages
     {
-        stage('Run Selenium Tests with pytest'){
-            steps{
+        
+        stage('Run Selenium Tests with pytest') {
+            steps {
                 echo "Running Selenium Tests using pytest"
-                bat 'pip install -r requirements.txt'
-                bat 'start /B python app.py'
-                bat 'ping 127.0.0.1 -n 5 > nul'
-                bat 'python -m pytest -v'
+        
+                bat 'python -m venv .venv'
+                bat '.venv\\Scripts\\python.exe -m pip install --upgrade pip'
+                bat '.venv\\Scripts\\python.exe -m pip install -r requirements.txt'
+        
+                bat 'start "" /B .venv\\Scripts\\python.exe app.py'
+                bat 'ping 127.0.0.1 -n 6 > nul'
+        
+                bat '.venv\\Scripts\\python.exe -m pytest -v'
             }
         }
+
         stage('Build Docker Image') {
             steps {
                 echo "Build Docker Image"
