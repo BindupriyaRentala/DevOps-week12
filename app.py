@@ -21,15 +21,15 @@ def register():
         </script>
         """
 
-    if len(password) < 8:
+    if len(password) < 6:
         return """
         <script>
-        alert('Password must be at least 8 characters.');
+        alert('Password must be at least 6 characters.');
         window.history.back();
         </script>
         """
 
-    return f"Hello {username}! Welcome to website"
+    return f"Hello, {username}! Welcome to website"
 
 
 if __name__ == '__main__':
